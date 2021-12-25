@@ -460,7 +460,7 @@ jQuery(document).ready(function ($) {
 
     for (var i = 0; i < otherTabs.length; i++) {
       var nav = $('<ul class="nav d-none" id="tmpNav"></ul>');
-      nav.append('<li class="nav-item"><a href="#" data-toggle="tab" data-target="' + otherTabs[i] + '">nav</a></li>"');
+      nav.append('<li class="nav-item"><a href="contact.html" data-toggle="tab" data-target="' + otherTabs[i] + '">nav</a></li>"');
       nav.find('a').tab('show');
     }
   });
