@@ -68,6 +68,26 @@
     ----------------------------------------------------- */
 /* */
 /*1.0 Root Css*/
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .contactbutton {display: none;} 
+
+} 
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+.contactbutton {display: none;} 
+ 
+} 
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+.contactbutton {display: none;} 
+}
+
+
+
+
 :root
 {
     --Primary__color: #496cfe;
