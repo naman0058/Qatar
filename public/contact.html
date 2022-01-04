@@ -302,10 +302,10 @@
                     customer support. We are love to hear from you</p>
                     <div class="section-title-spacer"></div><!-- /.section-title-spacer -->
                     <form action="#" class="rt-form rt-line-form">
-                        <input type="text" placeholder="Name" class="form-control rt-mb-30">
-                        <input type="email" placeholder="Email" class="form-control rt-mb-30">
-                        <textarea placeholder="Message" class="form-control rt-mb-30"></textarea>
-                        <input type="submit" value="SUBMIT NOW" class="rt-btn rt-gradient pill text-uppercase rt-mb-30">
+                        <input type="text" id="name" placeholder="Name" class="form-control rt-mb-30">
+                        <input type="email" id="email" placeholder="Email" class="form-control rt-mb-30">
+                        <textarea id="message" placeholder="Message" class="form-control rt-mb-30"></textarea>
+                        <input type="button" value="SUBMIT NOW" class="rt-btn rt-gradient pill text-uppercase rt-mb-30 submit">
                     </form>
                 </div><!-- /.rt-section-title-wrapper -->
             </div><!-- /.col-lg-9 -->
@@ -610,6 +610,42 @@
 
 </body>
 
+<script src="https://smtpjs.com/v3/smtp.js">
+</script>
+
+<script>
+
+    $('.submit').click(function(){
+
+
+if( $('#name').val() == '' || $('#name').val() == [] || $('#name').val() == null  ) alert('Enter Name')
+else if( $('#email').val() == '' || $('#email').val() == [] || $('#email').val() == null  ) alert('Enter Email')
+else if( $('#message').val() == '' || $('#message').val() == [] || $('#message').val() == null  ) alert('Enter Message')
+
+else {
+
+let name = $('#name').val()
+let email = $('#email').val()
+let message =  $('#message').val()
+
+    Email.send({
+    Host : "smtp.elasticemail.com",
+    Username : "jnaman345@gmail.com",
+    Password : "3CAAF9F23845019B4BA25E0683939014C2C8",
+    To : 'info@royalpalmtours.com',
+    From : "jnaman345@gmail.com",
+    Subject : name + "Enquiry",
+    Body : "Hii RoyalPalmTour , My name is " + name + ' and my email is ' + email + ' I have an query regarding to  ' + message
+}).then(
+  message => alert('Thankyou. We Will Contact you soon.')
+);
+
+}
+
+     
+    })
+    
+    </script>
 
 <!--  Palm/contact.html  15:30:34 GMT -->
 </html>
