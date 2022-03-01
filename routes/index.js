@@ -53,7 +53,7 @@ router.get('/offers',(req,res)=>{
 
 
 
-router.get('/trip',(req,res)=>{
+router.get('/trip-view',(req,res)=>{
   var query = `select * from country;`
   var query1 = `select t.* , 
                 (select c.name from country c where c.id = t.countryid) as countryname,
