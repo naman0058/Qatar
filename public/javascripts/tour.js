@@ -147,7 +147,7 @@ function makeTable(board){
                     <th scope="row">
                       <div class="media align-items-center">
                         <div class="media-body">
-                          <span class="mb-0 text-sm">Rs. ${item.price}</span>
+                          <span class="mb-0 text-sm">ر.ع.${item.price}</span>
                         </div>
                       </div>
                     </th>
