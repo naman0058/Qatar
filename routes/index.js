@@ -67,6 +67,20 @@ router.get('/trip-view',(req,res)=>{
 
 
 
+router.get('/immigration',(req,res)=>{
+  var query = `select * from country;`
+  var query1 = `select t.* , 
+                (select c.name from country c where c.id = t.countryid) as countryname,
+                (select s.name from state s where s.id = t.stateid) as statename
+                from tour t order by id desc;`
+  pool.query(query+query1,(err,result)=>{
+    if(err) throw err;
+    else res.render('immigration_show',{result})
+  })
+})
+
+
+
 
 router.get('/trip-details',(req,res)=>{
   var query = `select * from trip where projectid = '${req.query.id}';`
@@ -84,8 +98,31 @@ router.get('/trip-details',(req,res)=>{
 
 
 
+router.get('/immigration-details',(req,res)=>{
+  var query = `select * from trip where projectid = '${req.query.id}';`
+  var query1 = `select t.* , 
+  (select c.name from country c where c.id = t.countryid) as countryname,
+  (select s.name from state s where s.id = t.stateid) as statename
+  from tour t where id = '${req.query.id}';`
+  var query2 = `select * from project_image where projectid = '${req.query.id}';`
+
+  pool.query(query+query1+query2,(err,result)=>{
+    if(err) throw err;
+    else res.render('immigration_details',{result,id:req.query.id})
+  })
+})
+
+
 
 router.get('/get-tour-details',(req,res)=>{
+  pool.query(`select * from tour where id = '${req.query.id}'`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result)
+  })
+})
+
+
+router.get('/get-immigration-details',(req,res)=>{
   pool.query(`select * from tour where id = '${req.query.id}'`,(err,result)=>{
     if(err) throw err;
     else res.json(result)
