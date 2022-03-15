@@ -3,6 +3,59 @@ var router = express.Router();
 var pool = require('./pool')
 
 
+
+
+
+
+
+
+
+//  stripe payment start
+
+const stripe = require('stripe')('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');
+
+
+router.get('/payment',(req,res)=>{
+  pool.query(`select price from tour where id = '${req.query.id}'`,(err,result)=>{
+    if(err) throw err;
+    else res.render('ui' , {msg:'' , price : result[0].price})
+  })
+  
+})
+
+router.post("/charge", (req, res) => {
+  console.log(req.body)
+ 
+
+  try {
+    stripe.customers
+      .create({
+        name: req.body.name,
+        email: req.body.email,
+        source: req.body.stripeToken
+      })
+      .then(customer =>
+        stripe.charges.create({
+          amount: req.body.amount * 100,
+          currency: "usd",
+          customer: customer.id
+        })
+      )
+      .then(() => res.render("thankyou"))
+      .catch(err => res.render("ui",{msg : err.raw.message , price : req.body.amount}));
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+
+//  stripe payment end
+
+
+
+
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var query = `select * from country;`
@@ -724,6 +777,9 @@ router.get('/contact/delete',(req,res)=>{
     else res.redirect('/all-contact');
   })
 })
+
+
+
 
 
 module.exports = router;
